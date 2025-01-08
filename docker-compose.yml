@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  mp2Db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mp2Db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=yourStrong(!)Password
+    ports:
+      - "1433:1433"
+    networks:
+      - mp2-network
+    restart: always
+    
+  frontend:
+    build:
+      context: ./MusicParty2Angular  
+      dockerfile: Dockerfile
+    container_name: mp2Angular
+    ports:
+      - "8080:4200"
+    networks:
+      - mp2-network
+
+  backend:
+    build: 
+      context: .
+      dockerfile: MusicParty2ASP/Controller/Dockerfile 
+    container_name: mp2Api
+    ports:
+      - "5000:80"
+    depends_on:
+      - mp2Db
+    networks:
+      - mp2-network
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=mp2Db,1433;Database=musicparty_db_2;User Id=sa;Password=yourStrong(!)Password;TrustServerCertificate=true
+    restart: always
+
+networks:
+  mp2-network:
+    driver: bridge

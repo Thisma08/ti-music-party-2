@@ -1,0 +1,16 @@
+<app-create-vote (addedVote)="onVoteAdded()"></app-create-vote>
+
+<div>
+  <h2>Top 10</h2>
+  <table>
+    <tbody>
+      @for(music of musics; track $index; let e = $even; let o = $odd) {
+        <tr [ngClass]="{'even': e, 'odd': o}">
+          <td>{{$index + 1}}</td>
+          <td>{{music.title}}</td>
+          <td>{{voteCounts.get(music.id!) || 0}} votes</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

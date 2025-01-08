@@ -1,0 +1,109 @@
+<form [formGroup]="createMusicForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="title">Title <a class="asterisk">*</a></label>
+    <input type="text" id="title" formControlName="title" />
+  </div>
+  @if(createMusicForm.get('title')?.invalid && createMusicForm.get('title')?.touched) {
+    <div class="error">
+      @if(createMusicForm.get('title')?.errors?.['required']) {
+        <p>Title is required.</p>
+      }
+      @if(createMusicForm.get('title')?.errors?.['minlength']) {
+        <p>Title must be at least 2 characters.</p>
+      }
+      @if(createMusicForm.get('title')?.errors?.['maxlength']) {
+        <p>Title cannot exceed 100 characters.</p>
+      }
+    </div>
+  }
+
+  <div>
+    <label for="type">Type <a class="asterisk">*</a></label>
+    <input type="text" id="type" formControlName="type" />
+  </div>
+  @if(createMusicForm.get('type')?.invalid && createMusicForm.get('type')?.touched) {
+    <div class="error">
+      @if(createMusicForm.get('type')?.errors?.['required']) {
+        <p>Type is required.</p>
+      }
+      @if(createMusicForm.get('type')?.errors?.['minlength']) {
+        <p>Type must be at least 2 characters.</p>
+      }
+      @if(createMusicForm.get('type')?.errors?.['maxlength']) {
+        <p>Type cannot exceed 50 characters.</p>
+      }
+    </div>
+  }
+
+  <div>
+    <label for="youtubeUrl">YouTube URL <a class="asterisk">*</a></label>
+    <input type="text" id="youtubeUrl" formControlName="youtubeUrl" />
+  </div>
+  @if(createMusicForm.get('youtubeUrl')?.invalid && createMusicForm.get('youtubeUrl')?.touched) {
+    <div class="error">
+      @if(createMusicForm.get('youtubeUrl')?.errors?.['required']) {
+        <p>Youtube URL is required.</p>
+      }
+      @if(createMusicForm.get('youtubeUrl')?.errors?.['pattern']) {
+        <p>Invalid YouTube URL.</p>
+      }
+    </div>
+  }
+
+  <div>
+    <label for="userId">User <a class="asterisk">*</a></label>
+    <select id="userId" formControlName="userId" type="number">
+      @for(user of users; track $index) {
+        <option value="{{user.id}}">{{user.pseudo}}</option>
+      }
+    </select>
+  </div>
+  @if(createMusicForm.get('userId')?.invalid && createMusicForm.get('userId')?.touched) {
+    <div class="error">
+      @if(createMusicForm.get('userId')?.errors?.['required']) {
+        <p>User is required.</p>
+      }
+    </div>
+  }
+
+  <a class="asterisk">* : Mandatory</a>
+
+  <button type="submit" [disabled]="createMusicForm.invalid">Submit</button>
+</form>
+
+@if(successMessage) {
+  <div class="success">
+    {{this.successMessage}}
+  </div>
+}
+
+@if(errorMessage) {
+  <div class="error">
+    Failed to create a music: {{this.errorMessage}}
+  </div>
+}
+
+@if(serverErrors) {
+  <div>
+    @if(serverErrors['Title']) {
+      <div class="error">
+        <p>{{ serverErrors['Title'][0] }}</p>
+      </div>
+    }
+    @if(serverErrors['Type']) {
+      <div class="error">
+        <p>{{ serverErrors['Type'][0] }}</p>
+      </div>
+    }
+    @if(this.serverErrors['YoutubeUrl']) {
+      <div class="error">
+        <p>{{ serverErrors['YoutubeUrl'][0] }}</p>
+      </div>
+    }
+    @if(serverErrors['UserId']) {
+      <div class="error">
+        <p>{{ serverErrors['UserId'][0] }}</p>
+      </div>
+    }
+  </div>
+}

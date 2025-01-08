@@ -1,0 +1,33 @@
+<div class="addVoteForm">
+  <div>
+    <label for="user">Select User:</label>
+    <select id="user" [(ngModel)]="selectedUserId">
+      @for(user of users; track $index) {
+        <option [value]="user.id">{{ user.pseudo }}</option>
+      }
+    </select>
+  </div>
+
+  <div>
+    <label for="song">Select Song:</label>
+    <select id="song" [(ngModel)]="selectedMusicId">
+      @for(music of musics; track $index) {
+        <option [value]="music.id">{{ music.title }}</option>
+      }
+    </select>
+  </div>
+
+  <button (click)="addVote()">Add Vote</button>
+</div>
+
+@if(successMessage) {
+  <div class="success">
+    {{this.successMessage}}
+  </div>
+}
+
+@if(errorMessage) {
+  <div class="error">
+    Failed to create the vote: {{this.errorMessage}}
+  </div>
+}
