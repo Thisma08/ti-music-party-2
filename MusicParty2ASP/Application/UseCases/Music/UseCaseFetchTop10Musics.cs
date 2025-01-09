@@ -1,4 +1,4 @@
-using Application.UseCases.Song.Dtos;
+using Application.UseCases.Music.Dtos;
 using Application.UseCases.Utils;
 using AutoMapper;
 using Infrastructure.Repositories;

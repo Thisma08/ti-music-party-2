@@ -20,7 +20,8 @@ go;
 create table musics
 (
     id int identity primary key,
-    title varchar(100) not null unique,
+    title varchar(100) not null,
+	author varchar(100) not null,
     type varchar(50) not null,
     youtubeUrl varchar(500) not null,
     userId int not null references users

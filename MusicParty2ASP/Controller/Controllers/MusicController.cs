@@ -1,6 +1,5 @@
 using Application.UseCases.Music;
-using Application.UseCases.Song;
-using Application.UseCases.Song.Dtos;
+using Application.UseCases.Music.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MusicParty2.Controllers;

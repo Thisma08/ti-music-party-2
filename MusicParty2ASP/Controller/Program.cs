@@ -1,6 +1,5 @@
 using Application;
 using Application.UseCases.Music;
-using Application.UseCases.Song;
 using Application.UseCases.User;
 using Application.UseCases.Vote;
 using Infrastructure;

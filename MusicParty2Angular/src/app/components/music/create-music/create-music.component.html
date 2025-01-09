@@ -18,6 +18,24 @@
   }
 
   <div>
+    <label for="author">Author <a class="asterisk">*</a></label>
+    <input type="text" id="author" formControlName="author" />
+  </div>
+  @if(createMusicForm.get('author')?.invalid && createMusicForm.get('author')?.touched) {
+    <div class="error">
+      @if(createMusicForm.get('author')?.errors?.['required']) {
+        <p>Author is required.</p>
+      }
+      @if(createMusicForm.get('author')?.errors?.['minlength']) {
+        <p>Author must be at least 2 characters.</p>
+      }
+      @if(createMusicForm.get('author')?.errors?.['maxlength']) {
+        <p>Author cannot exceed 100 characters.</p>
+      }
+    </div>
+  }
+
+  <div>
     <label for="type">Type <a class="asterisk">*</a></label>
     <input type="text" id="type" formControlName="type" />
   </div>

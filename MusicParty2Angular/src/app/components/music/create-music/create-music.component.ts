@@ -24,11 +24,13 @@ export class CreateMusicComponent implements OnInit {
   constructor(private fb: FormBuilder, private musicService: MusicService, private userService: UserService) {
     this.createMusicForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      author: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       type: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       youtubeUrl: ['', [Validators.required, Validators.pattern(/^(https?:\/\/)?(www\.youtube\.com|youtu\.be)\/.+$/)],],
       userId: ['', [Validators.required]],
 /*
       title: [''],
+      author: [''],
       type: [''],
       youtubeUrl: [''],
       userId: [''],

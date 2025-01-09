@@ -1,4 +1,4 @@
-using Application.UseCases.Song.Dtos;
+using Application.UseCases.Music.Dtos;
 using Application.UseCases.Utils;
 using AutoMapper;
 using Infrastructure.Repositories;
@@ -23,7 +23,7 @@ public class UseCaseCreateMusic : IUseCaseWriter<DtoOutputMusic, DtoInputMusic>
         try
         {
             var music = _mapper.Map<Domain.Music>(input);
-            var dbMusic = _musicRepository.Create(music.Title, music.Type, music.YoutubeUrl, music.UserId);
+            var dbMusic = _musicRepository.Create(music.Title, music.Author, music.Type, music.YoutubeUrl, music.UserId);
             return _mapper.Map<DtoOutputMusic>(dbMusic);
         }
         catch (DbUpdateException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 2627)

@@ -39,11 +39,12 @@ public class MusicRepository : IMusicRepository
         return _context.Musics.FirstOrDefault(m => m.Id == id);
     }
 
-    public DbMusic Create(string title, string type, string youtubeUrl, int userId)
+    public DbMusic Create(string title, string author, string type, string youtubeUrl, int userId)
     {
         var music = new DbMusic
         {
             Title = title,
+            Author = author,
             Type = type,
             YoutubeUrl = youtubeUrl,
             UserId = userId

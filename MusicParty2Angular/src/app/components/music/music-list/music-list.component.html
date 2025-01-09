@@ -4,6 +4,7 @@
     <thead>
     <tr>
       <th>Title</th>
+      <th>Author</th>
       <th>Type</th>
       <th>YouTube URL</th>
     </tr>
@@ -12,6 +13,7 @@
       @for(music of musics; track $index; let e = $even; let o = $odd) {
         <tr [ngClass]="{'even': e, 'odd': o}">
           <td class="clickable" (click)="openInYoutube(music.youtubeUrl)">{{music.title}}</td>
+          <td>{{music.author}}</td>
           <td>{{music.type}}</td>
           <td>{{music.youtubeUrl}}</td>
           <td><app-delete-music [music]="music" (deletedMusic)="onMusicDeleted($event)"></app-delete-music></td>
