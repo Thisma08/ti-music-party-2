@@ -20,16 +20,26 @@ public class UseCaseCreateMusic : IUseCaseWriter<DtoOutputMusic, DtoInputMusic>
 
     public DtoOutputMusic Execute(DtoInputMusic input)
     {
+        var music = _mapper.Map<Domain.Music>(input);
+        
+        var existingMusic = _musicRepository.FetchByTitleAndAuthor(music.Title, music.Author);
+        if (existingMusic != null)
+        {
+            throw new InvalidOperationException("A music with the same title and author already exists.");
+        }
+        
         try
         {
-            var music = _mapper.Map<Domain.Music>(input);
+            
             var dbMusic = _musicRepository.Create(music.Title, music.Author, music.Type, music.YoutubeUrl, music.UserId);
             return _mapper.Map<DtoOutputMusic>(dbMusic);
         }
+        /*
         catch (DbUpdateException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 2627)
         {
             throw new InvalidOperationException("A music with the same title already exists.", ex);
         }
+        */
         catch (Exception ex)
         {
             throw new InvalidOperationException($"An error occurred: {ex.Message}");

@@ -36,6 +36,10 @@ public partial class AppDbContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("title");
+            entity.Property(e => e.Author)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("author");
             entity.Property(e => e.Type)
                 .HasMaxLength(50)
                 .IsUnicode(false)

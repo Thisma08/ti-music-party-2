@@ -33,10 +33,10 @@ public class MusicRepository : IMusicRepository
 
         return top10Musics;
     }
-
-    public DbMusic? FetchById(int id)
+    
+    public DbMusic? FetchByTitleAndAuthor(string title, string author)
     {
-        return _context.Musics.FirstOrDefault(m => m.Id == id);
+        return _context.Musics.FirstOrDefault(m => m.Title == title && m.Author == author);
     }
 
     public DbMusic Create(string title, string author, string type, string youtubeUrl, int userId)
