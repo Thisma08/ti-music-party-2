@@ -9,7 +9,7 @@ import {Music} from '../classes/music';
   providedIn: 'root'
 })
 export class VoteService {
-  private apiUrl = 'http://localhost:5000/api/votes';
+  private apiUrl = 'http://localhost:5260/api/votes';
 
   constructor(private http: HttpClient) { }
 

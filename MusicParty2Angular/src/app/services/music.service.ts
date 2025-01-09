@@ -7,7 +7,7 @@ import {Music} from '../classes/music';
   providedIn: 'root'
 })
 export class MusicService {
-  private apiUrl = 'http://localhost:5000/api/musics';
+  private apiUrl = 'http://localhost:5260/api/musics';
 
   constructor(private http: HttpClient) {}
 
