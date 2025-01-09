@@ -48,16 +48,9 @@ public class MusicRepository : IMusicRepository
             YoutubeUrl = youtubeUrl,
             UserId = userId
         };
-
-        try
-        {
-            _context.Musics.Add(music);
-            _context.SaveChanges();
-        }
-        catch (DbUpdateException ex) when (ex.InnerException is SqlException sqlEx && sqlEx.Number == 2627)
-        {
-            throw new InvalidOperationException("A music with the same title already exists.", ex);
-        }
+        
+        _context.Musics.Add(music); 
+        _context.SaveChanges();
 
         return music;
     }

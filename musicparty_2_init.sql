@@ -39,7 +39,8 @@ go;
 insert into users(pseudo)
 values
     ('Thisma'),
-    ('Arisu');
+    ('Arisu'),
+    ('Pyokoon');
 go;
 
 insert into musics(title, type, youtubeUrl, userId)
